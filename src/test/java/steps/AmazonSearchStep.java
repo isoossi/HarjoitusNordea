@@ -27,6 +27,6 @@ public class AmazonSearchStep {
     @When("^user clicks second product$")
     public void userClicksSecondProduct() {
         final AmazonPage amazonPage = new AmazonPage();
-        amazonPage.selectItemFromSearchList(2);
+        amazonPage.selectItemFromSearchList(1);
     }
 }
