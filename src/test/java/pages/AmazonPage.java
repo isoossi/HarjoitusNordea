@@ -53,12 +53,18 @@ public class AmazonPage extends BasePage{
         waitForElement(PageLocators.resultsList, 10);
         List<WebElement> listOfItems = getWebDriver().findElements(PageLocators.resultsList);
         if(listOfItems.size() > itemNumber) {
-            WebElement titleOfItem = listOfItems.get(itemNumber);
-            titleOfItem.findElement(By.partialLinkText("")).click();
-            assertTrue(getWebDriver().findElement(PageLocators.productTitle).getText()
-                    .contains("Nikon D3X"), "Nikon D3X not found.");
+            int searchItem = 0;
+            for(WebElement ele : listOfItems) {
+                if (searchItem == itemNumber) {
+                    ele.findElement(By.partialLinkText("")).click();
+                    assertTrue(getWebDriver().findElement(PageLocators.productTitle).getText()
+                            .contains("Nikon D3X"), "Nikon D3X not found.");
+                    break;
+                }
+                searchItem++;
+            }
         } else {
-            fail("No search results found.");
+            fail("Not enough search results.");
         }
         return this;
     }
